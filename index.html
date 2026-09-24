@@ -45,8 +45,7 @@ f.addEventListener('submit',async e=>{
  const answers={};
  Q.forEach((q,i)=>{const a=document.querySelector(`input[name=\"q${i}\"]:checked`);answers[q[0]]=a?a.value:''});
  const comment=document.getElementById('comment').value;
- const payload={department:cur?cur.title:'',answers:answers,staff:selectedStaff,comment:comment,complaint:comment};
- const btn=f.querySelector('button.primary'); btn.disabled=true; btn.textContent='Жіберілуде...';
+const payload={department:cur?.title||'',answers,staff:selectedStaff,comment:comment,complaint:comment,name:document.getElementById('patientName').value,phone:document.getElementById('patientPhone').value}; const btn=f.querySelector('button.primary'); btn.disabled=true; btn.textContent='Жіберілуде...';
  try{
   await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
   ok.classList.remove('hidden');survey.classList.add('hidden');scrollTo(0,0);
